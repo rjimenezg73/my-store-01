@@ -45,11 +45,18 @@ const router = express.Router();
  */
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id: id,
-    Name: "Producto 2",
-    Price: 5000
-  });
+  if(id === '999'){
+    res.status(404).json({
+      message: "Not Found"
+    });
+  } else{
+      res.status(200).json({
+        id: id,
+        Name: "Producto 2",
+        Price: 5000
+      });
+  }
+
 });
 
 /**
@@ -75,7 +82,8 @@ Se recive:
  */
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  //
+  res.status(201).json({
     message: 'created',
     data: body
   });
