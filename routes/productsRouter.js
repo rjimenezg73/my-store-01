@@ -90,11 +90,8 @@ Se recive:
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
-    message: 'update',
-    data: body,
-    id: id
-  });
+  const product = service.update(id, body);
+  res.json(product);
 });
 
 
@@ -103,10 +100,8 @@ router.patch('/:id', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    message: 'delete',
-    id: id
-  });
+  const respuesta = service.delete(id);
+  res.json(respuesta);
 });
 
 

@@ -1,4 +1,5 @@
 const faker = require('faker');
+const { ne } = require('faker/lib/locales');
 
 
 /**
@@ -26,9 +27,10 @@ class ProductsService{
   create(data){
     const newProduct = {
       id: faker.datatype.uuid(),
+      image: faker.image.imageUrl(),
       ...data,
     }
-    this.products.push(data);
+    this.products.push(newProduct);
     return newProduct;
   }
 
@@ -40,12 +42,26 @@ class ProductsService{
     return this.products.find(item => item.id === id);
   }
 
-  update(){
-
+  update(id, changes){
+    const index = this.products.findIndex(item => item.id === id); // en vez de retornarme el elemento, me retorna la posición donde éste elemento se encuentra
+    if(index === -1){
+      throw new Error('Product not found!');
+    }
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes
+    };
+    return this.products[index];
   }
 
-  delete(){
-
+  delete(id){
+    const index = this.products.findIndex(item => item.id === id);
+    if(index === -1){
+      throw new Error('Product not found!');
+    }
+    this.products.splice(index,1);
+    return { id };
   }
 
 }
