@@ -1,6 +1,9 @@
 const faker = require('faker');
 
 
+/**
+ * En ésta clase se va a gestionar todo lo que son los productos
+ */
 
 class ProductsService{
   constructor(){
@@ -20,8 +23,13 @@ class ProductsService{
     }
   }
 
-  create(){
-
+  create(data){
+    const newProduct = {
+      id: faker.datatype.uuid(),
+      ...data,
+    }
+    this.products.push(data);
+    return newProduct;
   }
 
   find(){

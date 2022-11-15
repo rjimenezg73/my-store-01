@@ -1,5 +1,4 @@
 const express = require('express');
-const faker = require('faker');
 
 const ProductsService = require('../services/product.service');
 
@@ -62,11 +61,8 @@ Se recive:
  */
 router.post('/', (req, res) => {
   const body = req.body;
-  //
-  res.status(201).json({
-    message: 'created',
-    data: body
-  });
+  const newProduct = service.create(body);
+  res.status(201).json(newProduct);
 });
 
 /**
