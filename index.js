@@ -16,7 +16,7 @@ app.get('/nueva-ruta', (req, res) => {
 routerApi(app);
 
 app.listen(port, () => {
-  console.log('Servidor ejecutando en puerto: ' + port);
+  console.log('Servidor ejecutando en puerto: ' + port );
 });
 
 
