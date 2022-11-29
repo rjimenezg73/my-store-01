@@ -50,6 +50,7 @@ class ProductsService{
 
 
   async findOne(id){
+    const name = this.getTotal(); // Esto no debería funcionar porque getTotal() no existe
     return this.products.find(item => item.id === id);
   }
 
