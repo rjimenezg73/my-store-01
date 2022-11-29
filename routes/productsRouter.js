@@ -31,9 +31,9 @@ const service = new ProductsService();
  * http://localhost:3000/api/v1/products/numeroX
  * http://localhost:3000/api/v1/products/variable
  */
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const product = service.findOne(id);
+  const product = await service.findOne(id);
 
   res.json(product);
 });
@@ -59,9 +59,9 @@ Se recive:
 	}
 }
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body;
-  const newProduct = service.create(body);
+  const newProduct = await service.create(body);
   res.status(201).json(newProduct);
 });
 
@@ -87,10 +87,10 @@ Se recive:
 	"id": "1212"
 }
  */
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  const product = service.update(id, body);
+  const product = await service.update(id, body);
   res.json(product);
 });
 
@@ -98,9 +98,9 @@ router.patch('/:id', (req, res) => {
 /**
  * El delete recibe un parámetro pero no va a tener un cuerpo, solamente se manda un identificador para ser eliminado
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const respuesta = service.delete(id);
+  const respuesta = await service.delete(id);
   res.json(respuesta);
 });
 
