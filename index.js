@@ -1,7 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes/index');
 const app = express();
-const { logErrors, errorHandler } = require('./middlewares/error.handler');
+const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
 const port =  3000;
 
 app.use(express.json()); // Con esto nos permite recibir inf json desde el post
@@ -19,6 +19,7 @@ routerApi(app);
 // Los middlewares de tipo error se deben llamar después de definir el routing.
 // También es muy importante ver el orden en que éstos se ejecutan
 app.use(logErrors);
+app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
